@@ -1,0 +1,176 @@
+<form [formGroup]="registerFormControl">
+    <h1 align="center">Register</h1>
+    <br>
+    <div class="row">
+        <div class="col-lg-6">
+            <!-- PERSONAL INFORMATION-->
+            <div class="row field-data">
+
+                <h1 align="center">Personal Information</h1>
+                <div class="col-md form-group">
+                    <h6> First Name </h6>
+                    <mat-form-field appearance="fill">
+                        <input matInput type="text" placeholder="Tom" formControlName="firstName"
+                            [ngClass]="{ 'is-invalid': f.firstName.touched && f.firstName.errors }">
+                        <div *ngIf="f.firstName.touched && f.firstName.errors" class="invalid-feedback">
+                            <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                        </div>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md form-group">
+                    <h6> Last Name </h6>
+                    <mat-form-field appearance="fill">
+                        <input matInput type="text" type="text" placeholder="Mary" formControlName="lastName"
+                            [ngClass]="{ 'is-invalid': f.lastName.touched && f.lastName.errors }">
+                        <div *ngIf="f.lastName.touched && f.lastName.errors" class="invalid-feedback">
+                            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                        </div>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md form-group">
+                    <h6> Email </h6>
+                    <mat-form-field appearance="fill">
+                        <input matInput type="text" type="text" placeholder="ex. abc123@gmail.com"
+                            formControlName="email" email="true"
+                            [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors }">
+                        <div *ngIf="f.email.touched && f.email.errors" class="invalid-feedback">
+                            <div *ngIf="f.email.errors.required">Email is required</div>
+                            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row field-data">
+                <div class="col-md form-group">
+                    <h6> Gender </h6>
+                    <mat-form-field appearance="fill">
+                        <mat-select formControlName="gender" required placeholder="Gender"
+                            [ngClass]="{ 'is-invalid': f.gender.touched && f.gender.errors }">
+                            <mat-option *ngFor="let Gender of genders" [value]="Gender.value">
+                                {{Gender.genderValue}}
+                            </mat-option>
+                        </mat-select>
+                        <div *ngIf="f.gender.touched && f.gender.errors" class="invalid-feedback">
+                            <div *ngIf="f.gender.errors.required">Gender is required</div>
+                        </div>
+
+                    </mat-form-field>
+
+                </div>
+
+                <div class="col-md form-group">
+                    <h6> Phone Number </h6>
+                    <mat-form-field appearance="fill">
+                        <input matInput type="text" type="text" placeholder="123-456-789" formControlName="phoneNumber"
+                            required [ngClass]="{ 'is-invalid': f.phoneNumber.touched && f.phoneNumber.errors }"
+                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" [textMask]="{mask: numberMask}">
+                        <div *ngIf="f.phoneNumber.touched && f.phoneNumber.errors" class="invalid-feedback">
+                            <div *ngIf="f.phoneNumber.errors.required">Phone Number is required</div>
+                            <div *ngIf="f.phoneNumber.errors.minlength">Phone number must be valid</div>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACCOUNT INFORMATION-->
+        <div class="col-lg-6">
+            <div class="row field-data">
+                <h1 align="center">Account Information</h1>
+                <div class="col-md form-group">
+                    <h6> Username </h6>
+                    <mat-form-field appearance="fill">
+                        <input matInput type="text" type="text" placeholder="You will use this to login"
+                            formControlName="userName" required
+                            [ngClass]="{ 'is-invalid': f.userName.touched && f.userName.errors }">
+                        <div *ngIf="f.userName.touched && f.userName.errors" class="invalid-feedback">
+                            <div *ngIf="f.userName.errors.required">UserName is required</div>
+                            <div *ngIf="f.userName.errors.minlength">UserName must be at least 3
+                                characters
+                            </div>
+                        </div>
+                    </mat-form-field>
+                </div>
+
+
+
+                <div class="col-md form-group">
+                    <h6> Password </h6>
+                    <mat-form-field appearance="fill">
+                        <input matInput [type]="hide ? 'password' : 'text'" placeholder="******"
+                            formControlName="passWord" required
+                            [ngClass]="{ 'is-invalid': f.passWord.touched && f.passWord.errors }">
+                        <button mat-icon-button matSuffix (click)="hide = !hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <div *ngIf="f.passWord.touched && f.passWord.errors" class="invalid-feedback">
+                            <div *ngIf="f.passWord.errors.required">Password is required</div>
+                            <div *ngIf="f.passWord.errors.minlength">Password must be at least 6
+                                characters
+                            </div>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+
+
+            <div class="row field-data">
+                <div class="col-md-6">
+                    <h6> Security Question </h6>
+                    <mat-form-field appearance="fill">
+                        <input matInput type="text" type="text" placeholder="Security Question"
+                            formControlName="securityQuestion" required
+                            [ngClass]="{ 'is-invalid': f.securityQuestion.touched && f.securityQuestion.errors }">
+                        <div *ngIf="f.securityQuestion.touched && f.securityQuestion.errors" class="invalid-feedback">
+                            <div *ngIf="f.securityQuestion.errors.required">Security Question is
+                                required
+                            </div>
+                        </div>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <h6> Answer To Security Question </h6>
+                    <mat-form-field appearance="fill">
+                        <input matInput type="text" type="text" placeholder="Answer"
+                            formControlName="securityQuestionAnswer" required
+                            [ngClass]="{ 'is-invalid': f.securityQuestionAnswer.touched && f.securityQuestionAnswer.errors }">
+                        <div *ngIf="f.securityQuestionAnswer.touched && f.securityQuestionAnswer.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="f.securityQuestionAnswer.errors.required">Security Question
+                                Answer
+                                is
+                                required
+                            </div>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--BUTTON TO REGISTER ACCOUNT AND SUBMIT TO CONSOLE-->
+    <button type="button" class="registerbutton" mat-raised-button color="primary"
+        (click)="openRegister(registerConfirmation)" [disabled]="!registerFormControl.valid">Register</button>
+</form>
+
+<!-- CONFIRMATION PAGE TO REGISTER-->
+<ng-template #registerConfirmation>
+    <div class="modal-body">
+        Are you sure?
+    </div>
+
+    <div class="center">
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary mr-2" (click)="modalRef.hide()">
+                No | Go Back
+            </button>
+            &nbsp;
+            <button type="button" class="btn btn-outline-success ml-3" (click)="register()" (click)="modalRef.hide()">
+                Yes | SUBMIT
+            </button>
+        </div>
+    </div>
+</ng-template>
