@@ -1,3 +1,14 @@
+# Very Important
+npm install ngx-toastr
+npm install ngx-bootstrap 
+npm install bootstrap
+npm install angular2-text-mask
+
+set "noPropertyAccessFromIndexSignature": false  in the tsconfig.json file
+
+add  @import 'bootstrap/scss/bootstrap'; @import 'ngx-toastr/toastr.css'; 
+to the styles.scss or styles.css file
+
 # RegisterFormValidation
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.9.
